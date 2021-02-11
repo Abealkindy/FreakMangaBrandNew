@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_item"
+    android:layout_width="@dimen/_145sdp"
+    android:layout_height="@dimen/_205sdp"
+    android:layout_marginStart="@dimen/_4sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp">
+
+    <ImageView
+        android:id="@+id/image_thumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        tools:src="@drawable/imageplaceholder"
+        tools:ignore="ContentDescription" />
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_with_opacity"
+        android:gravity="center_vertical"
+        android:maxLines="5"
+        android:padding="@dimen/_3sdp"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_13ssp"
+        app:sizeToFit="true"
+        tools:ignore="RtlCompat"
+        tools:text="[Usamimi Syndrome (Erutasuku)] Dakara Boku wa Shinyuu no Musuko o Okasu | That's Why I'm Going to Rape My Best Friend's Son [English] [Anzu] [Digital]" />
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.mangapages.read_manga_mvp.ReadMangaActivity">
+
+    <TextView
+        android:id="@+id/manga_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:autoSizeMaxTextSize="@dimen/_16ssp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/mitr_semibold"
+        android:gravity="center"
+        android:maxLines="3"
+        android:textColor="#1e73be"
+        android:textSize="@dimen/_16ssp"
+        android:visibility="gone"
+        tools:targetApi="o"
+        tools:text="[Tawara Hiryuu] Saimin Seikatsu [Sonobe Ayako Hen] | Hypnotic Sexual Life [Shirogane Yuri Chapter] (COMIC GEE Vol. 9) [English] [RedLantern]" />
+
+    <Button
+        android:id="@+id/button_reload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:text="@string/reload_text"
+        android:textIsSelectable="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_read_manga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/read_manga_item_list" />
+
+    <LinearLayout
+        android:id="@+id/linear_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/_15sdp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/image_error"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:adjustViewBounds="true"
+            tools:ignore="ContentDescription"
+            tools:src="@raw/aquacry" />
+
+        <TextView
+            android:id="@+id/text_view_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mitr_semibold"
+            android:text="@string/oops_please_input_your_code_correctly"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_15ssp" />
+    </LinearLayout>
+</LinearLayout>

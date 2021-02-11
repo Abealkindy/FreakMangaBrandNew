@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FreakManga</string>
+    <string name="nhentai_text">NHentai</string>
+    <string name="hencafe_text">HenCafe</string>
+    <string name="hennexus_text">HenNexus</string>
+    <string name="nhentai_tag">nHentai</string>
+    <string name="hencafe_tag">henCafe</string>
+    <string name="hennexus_tag">henNexus</string>
+    <string name="search_text">Search</string>
+    <string name="oops_there_is_some_problem_in_this_app_please_scroll_to_repair_text">Oops, there is some problem in this app, please scroll to refresh</string>
+    <string name="reload_text">Reload</string>
+    <string name="oops_please_input_your_code_correctly">Oops, please input your code correctly</string>
+</resources>
