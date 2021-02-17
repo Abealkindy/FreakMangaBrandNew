@@ -6,7 +6,7 @@ public class Const {
      **/
     public static final String BASE_NHEN_URL = "https://nhentai.net";
     public static final String BASE_NHEN_PAGE_URL = "/?page=%1$s";
-    public static final String BASE_NHEN__SEARCH_PAGE_URL = "/search/?q=%1$s&page=%2$s";
+    public static final String BASE_NHEN__SEARCH_PAGE_URL = "/search/?q=%1$s&sort=%2$s&page=%3$s";
     public static final String BASE_NHEN_POPULAR_PAGE_URL = "?page=%1$s";
     //Tag URL
     public static final String BASE_NHEN_TAGS_URL = "/tags/";

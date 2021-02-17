@@ -35,9 +35,9 @@ import java.util.Objects;
 
 public class MangaMainActivity extends AppCompatActivity implements MangaMainListener, SearchView.OnQueryTextListener {
     private ActivityNhentaiMainBinding mBinding;
-    private MangaMainPresenter mainPresenter = new MangaMainPresenter(this);
+    private final MangaMainPresenter mainPresenter = new MangaMainPresenter(this);
     private String menu = "", hitStatus = "", hitType = "mainPage", textQuery = "";
-    private List<MangaMainPageModel> mainPageModelList = new ArrayList<>();
+    private final List<MangaMainPageModel> mainPageModelList = new ArrayList<>();
     private MainMangaAdapter newReleasesAdapter;
     private ProgressDialog progressDialog;
     int pageCount = 1;
@@ -124,7 +124,7 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
                     startActivity(intent);
                 } else {
                     progressDialog.show();
-                    mainURL = Const.BASE_NHEN_URL + String.format(Const.BASE_NHEN__SEARCH_PAGE_URL, textQuery, pageCount);
+                    mainURL = Const.BASE_NHEN_URL + String.format(Const.BASE_NHEN__SEARCH_PAGE_URL, textQuery, "", pageCount);
                     new MyTask(mainURL, menu, hitStatus, this).execute();
                 }
             } else if (menu.equalsIgnoreCase(getString(R.string.hennexus_tag))) {
@@ -206,6 +206,11 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
                 }
             } else if (hitStatus.equalsIgnoreCase("swipeRefresh")) {
                 progressDialog.dismiss();
+                if (hitType.equalsIgnoreCase("search")) {
+                    mBinding.floatingSearchButton.setVisibility(View.VISIBLE);
+                } else {
+                    mBinding.floatingSearchButton.setVisibility(View.GONE);
+                }
                 if (mainPageModelList != null) {
                     mainPageModelList.clear();
                     mainPageModelList.addAll(mangaMainPageModel);
