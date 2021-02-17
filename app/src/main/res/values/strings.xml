@@ -10,4 +10,5 @@
     <string name="oops_there_is_some_problem_in_this_app_please_scroll_to_repair_text">Oops, there is some problem in this app, please scroll to refresh</string>
     <string name="reload_text">Reload</string>
     <string name="oops_please_input_your_code_correctly">Oops, please input your code correctly</string>
+    <string name="sort_by_text">Sort by :</string>
 </resources>

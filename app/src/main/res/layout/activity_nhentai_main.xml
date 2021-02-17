@@ -4,12 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".activities.mangapages.manga_main_mvp.MangaMainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_spinner_sort_nhen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/pale_lemon_yellow"
+                android:fontFamily="@font/mitr_semibold"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/sort_by_text"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_20ssp" />
+
+            <Spinner
+                android:id="@+id/spinner_nhen_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/card_spinner_sort_nhen">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyler_hen"
@@ -50,14 +86,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:src="@drawable/ic_baseline_search_24"
-        android:visibility="gone"
-        app:backgroundTint="@color/colorBlueCalm" />
 </RelativeLayout>

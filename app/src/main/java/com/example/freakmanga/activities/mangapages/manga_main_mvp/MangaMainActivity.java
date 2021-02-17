@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -23,8 +24,10 @@ import com.example.freakmanga.R;
 import com.example.freakmanga.activities.MainActivity;
 import com.example.freakmanga.activities.mangapages.read_manga_mvp.ReadMangaActivity;
 import com.example.freakmanga.adapters.MainMangaAdapter;
+import com.example.freakmanga.adapters.NhenSpinnerAdapter;
 import com.example.freakmanga.databinding.ActivityNhentaiMainBinding;
 import com.example.freakmanga.models.MangaMainPageModel;
+import com.example.freakmanga.models.NhenSortModel;
 import com.example.freakmanga.utils.Const;
 import com.example.freakmanga.utils.EndlessRecyclerViewScrollListener;
 import com.google.gson.Gson;
@@ -36,8 +39,9 @@ import java.util.Objects;
 public class MangaMainActivity extends AppCompatActivity implements MangaMainListener, SearchView.OnQueryTextListener {
     private ActivityNhentaiMainBinding mBinding;
     private final MangaMainPresenter mainPresenter = new MangaMainPresenter(this);
-    private String menu = "", hitStatus = "", hitType = "mainPage", textQuery = "";
+    private String menu = "", hitStatus = "", hitType = "mainPage", textQuery = "", textSortByNhen = "";
     private final List<MangaMainPageModel> mainPageModelList = new ArrayList<>();
+    private final List<NhenSortModel> nhenSortList = new ArrayList<>();
     private MainMangaAdapter newReleasesAdapter;
     private ProgressDialog progressDialog;
     int pageCount = 1;
@@ -59,6 +63,25 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
             pageCount = 1;
             getHenData(pageCount++);
         });
+        mBinding.spinnerNhenSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                textSortByNhen = nhenSortList.get(position).getSortValue();
+                hitStatus = "swipeRefresh";
+                hitType = "search";
+                pageCount = 1;
+                getHenData(pageCount++);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                textSortByNhen = nhenSortList.get(0).getSortValue();
+                hitStatus = "swipeRefresh";
+                hitType = "search";
+                pageCount = 1;
+                getHenData(pageCount++);
+            }
+        });
     }
 
     private void initUI() {
@@ -68,6 +91,7 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
             hitStatus = "newPage";
             hitType = "mainPage";
             initProgressDialog();
+            initSpinner();
             getHenData(pageCount++);
             initRecycler();
         } else {
@@ -83,6 +107,18 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);
         return true;
+    }
+
+    private void initSpinner() {
+        NhenSortModel nhenSortModel = new NhenSortModel("Recent", "");
+        nhenSortList.add(nhenSortModel);
+        nhenSortModel = new NhenSortModel("Popular Today", "popular-today");
+        nhenSortList.add(nhenSortModel);
+        nhenSortModel = new NhenSortModel("Popular This Week", "popular-week");
+        nhenSortList.add(nhenSortModel);
+        nhenSortModel = new NhenSortModel("Popular of All Time", "popular");
+        nhenSortList.add(nhenSortModel);
+        mBinding.spinnerNhenSort.setAdapter(new NhenSpinnerAdapter(this, android.R.layout.simple_spinner_item, nhenSortList));
     }
 
     private void initRecycler() {
@@ -124,7 +160,7 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
                     startActivity(intent);
                 } else {
                     progressDialog.show();
-                    mainURL = Const.BASE_NHEN_URL + String.format(Const.BASE_NHEN__SEARCH_PAGE_URL, textQuery, "", pageCount);
+                    mainURL = Const.BASE_NHEN_URL + String.format(Const.BASE_NHEN__SEARCH_PAGE_URL, textQuery, textSortByNhen, pageCount);
                     new MyTask(mainURL, menu, hitStatus, this).execute();
                 }
             } else if (menu.equalsIgnoreCase(getString(R.string.hennexus_tag))) {
@@ -206,14 +242,15 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
                 }
             } else if (hitStatus.equalsIgnoreCase("swipeRefresh")) {
                 progressDialog.dismiss();
-                if (hitType.equalsIgnoreCase("search")) {
-                    mBinding.floatingSearchButton.setVisibility(View.VISIBLE);
-                } else {
-                    mBinding.floatingSearchButton.setVisibility(View.GONE);
-                }
                 if (mainPageModelList != null) {
                     mainPageModelList.clear();
                     mainPageModelList.addAll(mangaMainPageModel);
+                    mBinding.recylerHen.scrollToPosition(0);
+                    if (hitType.equalsIgnoreCase("search") && menu.equalsIgnoreCase(getString(R.string.nhentai_tag))) {
+                        mBinding.cardSpinnerSortNhen.setVisibility(View.VISIBLE);
+                    } else {
+                        mBinding.cardSpinnerSortNhen.setVisibility(View.GONE);
+                    }
                 }
                 newReleasesAdapter.notifyDataSetChanged();
             }
