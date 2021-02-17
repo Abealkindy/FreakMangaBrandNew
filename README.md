@@ -12,4 +12,3 @@ Browse and read hentai manga from 3 of some biggest hentai websites in one app
 - [NHentai](https://nhentai.net)
 - [Tsumino - coming soon](https://www.tsumino.com/)
 
-**[Latest Apk Here](https://drive.google.com/file/d/1-NPM5eAwzjFinpTeMvlb6upYKnl8G3kB/view?usp=sharing)
