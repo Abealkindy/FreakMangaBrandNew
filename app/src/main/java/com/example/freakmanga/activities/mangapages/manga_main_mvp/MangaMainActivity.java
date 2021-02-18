@@ -75,11 +75,11 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                textSortByNhen = nhenSortList.get(0).getSortValue();
-                hitStatus = "swipeRefresh";
-                hitType = "search";
-                pageCount = 1;
-                getHenData(pageCount++);
+//                textSortByNhen = nhenSortList.get(0).getSortValue();
+//                hitStatus = "swipeRefresh";
+//                hitType = "search";
+//                pageCount = 1;
+//                getHenData(pageCount++);
             }
         });
     }
