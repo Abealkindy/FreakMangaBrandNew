@@ -20,10 +20,10 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/mitr_semibold"
         android:gravity="center"
-        android:maxLines="3"
+        android:maxLines="4"
         android:textColor="#1e73be"
         android:textSize="@dimen/_16ssp"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:targetApi="o"
         tools:text="[Tawara Hiryuu] Saimin Seikatsu [Sonobe Ayako Hen] | Hypnotic Sexual Life [Shirogane Yuri Chapter] (COMIC GEE Vol. 9) [English] [RedLantern]" />
 
@@ -35,6 +35,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_30sdp"
         android:text="@string/reload_text"
+        android:focusable="true"
         android:textIsSelectable="true" />
 
     <androidx.recyclerview.widget.RecyclerView

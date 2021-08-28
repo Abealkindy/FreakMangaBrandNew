@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +61,7 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
     }
 
     private void getContentData() {
-        progressDialog.show();
+        runOnUiThread(() -> progressDialog.show());
         new MyTask(url, menu, this).execute();
     }
 
@@ -87,11 +88,12 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onGetImageContentSuccess(List<String> imageContentList, String title) {
         runOnUiThread(() -> {
             progressDialog.dismiss();
-            mBinding.mangaTitleText.setText(title);
+            mBinding.mangaTitleText.setText(title + "\n" + url.substring(url.indexOf("g/") + 2, url.length() - 2));
             if (imageContentList != null && !imageContentList.isEmpty()) {
                 isntError(false);
                 if (imageContentListLocal != null) {
