@@ -15,7 +15,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.freakmanga.R;
 import com.example.freakmanga.activities.mangapages.read_manga_mvp.ReadMangaActivity;
+import com.example.freakmanga.data.room.nhen_local.bookmark.NhenBookmarkTable;
+import com.example.freakmanga.data.room.nhen_local.history.NhenHistoryTable;
 import com.example.freakmanga.databinding.MangaItemListBinding;
+import com.example.freakmanga.fragments.NhenHistoryFragment;
 import com.example.freakmanga.models.MangaMainPageModel;
 import com.example.freakmanga.utils.Const;
 
@@ -27,12 +30,30 @@ import java.util.Objects;
 public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.ViewHolder> {
     private Context context;
     private List<MangaMainPageModel> henModelList;
-    private String menu;
+    private List<NhenHistoryTable> henHistoryList;
+    private List<NhenBookmarkTable> henBookmarkList;
+    private String menu = "";
+    private boolean isFromMainList = false;
 
     public MainMangaAdapter(Context context, List<MangaMainPageModel> henModelList, String menu) {
         this.context = context;
         this.henModelList = henModelList;
         this.menu = menu;
+        this.isFromMainList = true;
+    }
+
+    public MainMangaAdapter(Context context, List<NhenHistoryTable> henHistoryList) {
+        this.context = context;
+        this.henHistoryList = henHistoryList;
+        this.menu = context.getString(R.string.nhentai_tag);
+        this.isFromMainList = false;
+    }
+
+    public MainMangaAdapter(Context context, List<NhenBookmarkTable> henBookmarkList, boolean bookmark) {
+        this.context = context;
+        this.henBookmarkList = henBookmarkList;
+        this.menu = context.getString(R.string.nhentai_tag);
+        this.isFromMainList = false;
     }
 
     @NonNull
@@ -45,11 +66,25 @@ public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemListBinding.textTitle.setText(henModelList.get(position).getMangaTitle());
+        String title, thumb, url;
+        if (henModelList != null) {
+            title = henModelList.get(position).getMangaTitle();
+            thumb = henModelList.get(position).getThumbURL();
+            url = henModelList.get(position).getChapterURL();
+        } else if (henHistoryList != null) {
+            title = henHistoryList.get(position).getChapterTitle();
+            thumb = henHistoryList.get(position).getChapterThumb();
+            url = henHistoryList.get(position).getChapterURL();
+        } else {
+            title = henBookmarkList.get(position).getMangaTitle();
+            thumb = henBookmarkList.get(position).getMangaThumb();
+            url = henBookmarkList.get(position).getMangaDetailURL();
+        }
+        holder.itemListBinding.textTitle.setText(title);
         try {
             Glide.with(context)
                     .asDrawable()
-                    .load(new URL(henModelList.get(position).getThumbURL()))
+                    .load(new URL(thumb))
                     .apply(
                             new RequestOptions()
                                     .transform(new RoundedCorners(20))
@@ -64,25 +99,34 @@ public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.View
         holder.itemListBinding.relativeItem.setOnClickListener(v -> {
             String mangaURL;
             if (menu.equalsIgnoreCase(context.getString(R.string.nhentai_tag))) {
-                mangaURL = Const.BASE_NHEN_URL + henModelList.get(position).getChapterURL();
+                if (isFromMainList) {
+                    mangaURL = Const.BASE_NHEN_URL + url;
+                } else {
+                    mangaURL = url;
+                }
             } else if (menu.equalsIgnoreCase(context.getString(R.string.hennexus_tag))) {
-                mangaURL = Const.BASE_HENNEXUS_URL + henModelList.get(position).getChapterURL();
+                mangaURL = Const.BASE_HENNEXUS_URL + url;
             } else {
-                mangaURL = henModelList.get(position).getChapterURL();
+                mangaURL = url;
             }
             Intent intent = new Intent(context.getApplicationContext(), ReadMangaActivity.class);
             intent.putExtra("mangaURL", mangaURL);
             intent.putExtra("menu", menu);
-            intent.putExtra("mangaThumb", henModelList.get(position).getThumbURL());
-            intent.putExtra("mangaTitle", henModelList.get(position).getMangaTitle());
+            intent.putExtra("mangaThumb", thumb);
+            intent.putExtra("mangaTitle", title);
             context.startActivity(intent);
-            Log.e("menu", menu);
         });
     }
 
     @Override
     public int getItemCount() {
-        return henModelList.size();
+        if (henModelList != null) {
+            return henModelList.size();
+        } else if (henHistoryList != null) {
+            return henHistoryList.size();
+        } else {
+            return henBookmarkList.size();
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

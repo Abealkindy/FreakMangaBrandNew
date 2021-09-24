@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity android:name=".activities.mangapages.read_manga_mvp.ReadMangaActivity" />
-        <activity android:name=".activities.mangapages.MangaExploreActivity" />
+        <activity android:name=".activities.mangapages.MangaLocalActivity" />
         <activity android:name=".activities.mangapages.manga_main_mvp.MangaMainActivity" />
         <activity
             android:name=".activities.SplashActivity"

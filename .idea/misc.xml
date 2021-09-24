@@ -8,7 +8,11 @@
         <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/drawable/ic_favorite_black_24dp.xml" value="0.2169230769230769" />
         <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/drawable/ic_favorite_border_white_24dp.xml" value="0.2169230769230769" />
         <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/drawable/ic_refresh_white_24dp.xml" value="0.2169230769230769" />
+        <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/layout/activity_manga_explore.xml" value="0.20416666666666666" />
+        <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/layout/activity_nhentai_main.xml" value="0.18" />
         <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/layout/activity_read_manga.xml" value="0.20416666666666666" />
+        <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/layout/fragment_nhen_favourite.xml" value="0.20416666666666666" />
+        <entry key="..\:/Projects/Android/FreakManga/app/src/main/res/layout/fragment_nhen_history.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

@@ -11,4 +11,6 @@
     <string name="reload_text">Reload</string>
     <string name="oops_please_input_your_code_correctly">Oops, please input your code correctly</string>
     <string name="sort_by_text">Sort by :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

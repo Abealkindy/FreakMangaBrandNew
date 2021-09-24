@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.freakmanga.R;
 import com.example.freakmanga.activities.MainActivity;
+import com.example.freakmanga.activities.mangapages.MangaLocalActivity;
 import com.example.freakmanga.activities.mangapages.read_manga_mvp.ReadMangaActivity;
 import com.example.freakmanga.adapters.MainMangaAdapter;
 import com.example.freakmanga.adapters.NhenSpinnerAdapter;
@@ -82,6 +83,7 @@ public class MangaMainActivity extends AppCompatActivity implements MangaMainLis
 //                getHenData(pageCount++);
             }
         });
+        mBinding.fabLocal.setOnClickListener(view -> startActivity(new Intent(MangaMainActivity.this, MangaLocalActivity.class)));
     }
 
     private void initUI() {
