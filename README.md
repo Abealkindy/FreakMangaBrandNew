@@ -7,8 +7,8 @@ Browse and read hentai manga from 3 of some biggest hentai websites in one app
 
 ## Content sources:
 
-- [Hentai Cafe](https://hentai.cafe)
-- [Hentai Nexus](https://hentainexus.com)
+- [Hentai Cafe (deprecated)](https://hentai.cafe)
+- [Hentai Nexus (deprecated)](https://hentainexus.com)
 - [NHentai](https://nhentai.net)
 - [Tsumino - coming soon](https://www.tsumino.com/)
 
