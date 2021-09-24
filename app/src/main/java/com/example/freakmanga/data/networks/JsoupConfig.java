@@ -1,4 +1,4 @@
-package com.example.freakmanga.networks;
+package com.example.freakmanga.data.networks;
 
 import android.util.Log;
 

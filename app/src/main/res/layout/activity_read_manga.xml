@@ -27,16 +27,41 @@
         tools:targetApi="o"
         tools:text="[Tawara Hiryuu] Saimin Seikatsu [Sonobe Ayako Hen] | Hypnotic Sexual Life [Shirogane Yuri Chapter] (COMIC GEE Vol. 9) [English] [RedLantern]" />
 
-    <Button
-        android:id="@+id/button_reload"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
-        android:text="@string/reload_text"
-        android:focusable="true"
-        android:textIsSelectable="true" />
+        android:background="@color/black_with_opacity"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/button_reload"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:focusable="true"
+            android:src="@drawable/ic_refresh_white_24dp" />
+
+        <ImageView
+            android:id="@+id/button_favourite"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerInParent="true"
+            android:focusable="true"
+            android:src="@drawable/ic_favorite_unfilled_24dp" />
+
+        <ImageView
+            android:id="@+id/button_share"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_share_24" />
+
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_read_manga"

@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.example.freakmanga.R;
 import com.example.freakmanga.activities.mangapages.manga_main_mvp.MangaMainActivity;
 import com.example.freakmanga.databinding.ActivityMainBinding;
-import com.example.freakmanga.networks.InternetConnection;
+import com.example.freakmanga.data.networks.InternetConnection;
 import com.zhkrb.cloudflare_scrape_webview.CfCallback;
 import com.zhkrb.cloudflare_scrape_webview.Cloudflare;
 import com.zhkrb.cloudflare_scrape_webview.util.ConvertUtil;

@@ -73,6 +73,8 @@ public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.View
             Intent intent = new Intent(context.getApplicationContext(), ReadMangaActivity.class);
             intent.putExtra("mangaURL", mangaURL);
             intent.putExtra("menu", menu);
+            intent.putExtra("mangaThumb", henModelList.get(position).getThumbURL());
+            intent.putExtra("mangaTitle", henModelList.get(position).getMangaTitle());
             context.startActivity(intent);
             Log.e("menu", menu);
         });

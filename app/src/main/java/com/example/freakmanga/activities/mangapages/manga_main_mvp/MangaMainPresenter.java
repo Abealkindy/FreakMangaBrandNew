@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.freakmanga.R;
 import com.example.freakmanga.models.MangaMainPageModel;
-import com.example.freakmanga.networks.JsoupConfig;
+import com.example.freakmanga.data.networks.JsoupConfig;
 import com.google.gson.Gson;
 
 import org.jsoup.nodes.Document;
