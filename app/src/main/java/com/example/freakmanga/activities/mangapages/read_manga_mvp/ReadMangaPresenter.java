@@ -41,6 +41,14 @@ public class ReadMangaPresenter {
                         if (images.contains("t.jpg")) {
                             tests = test.replace("t.jpg", ".jpg");
                         }
+                    } else if (images.contains("t5.nhentai.net")) {
+                        test = images.replace("t5.nhentai.net", "i5.nhentai.net");
+                        if (images.contains("t.png")) {
+                            tests = test.replace("t.png", ".png");
+                        }
+                        if (images.contains("t.jpg")) {
+                            tests = test.replace("t.jpg", ".jpg");
+                        }
                     }
                     henModelList.add(tests);
                 }
