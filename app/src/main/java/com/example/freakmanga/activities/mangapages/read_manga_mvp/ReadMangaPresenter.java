@@ -42,6 +42,9 @@ public class ReadMangaPresenter {
                         if (images.contains("t.jpg")) {
                             tests = test.replace("t.jpg", ".jpg");
                         }
+                        if (images.contains("t.gif")) {
+                            tests = test.replace("t.gif", ".gif");
+                        }
                     }
                     henModelList.add("https://" + tests);
                 }
