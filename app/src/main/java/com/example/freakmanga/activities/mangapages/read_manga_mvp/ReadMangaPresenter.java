@@ -33,16 +33,9 @@ public class ReadMangaPresenter {
                 title = document.getElementsByTag("h1").get(0).text();
                 for (Element el : elements) {
                     String images = el.getElementsByTag("img").attr("data-src");
-                    if (images.contains("t.nhentai.net")) {
-                        test = images.replace("t.nhentai.net", "i.nhentai.net");
-                        if (images.contains("t.png")) {
-                            tests = test.replace("t.png", ".png");
-                        }
-                        if (images.contains("t.jpg")) {
-                            tests = test.replace("t.jpg", ".jpg");
-                        }
-                    } else if (images.contains("t5.nhentai.net")) {
-                        test = images.replace("t5.nhentai.net", "i5.nhentai.net");
+                    Log.e("imageFromTag", images);
+                    if (images.substring(8).startsWith("t")) {
+                        test = images.substring(8).replaceFirst("t", "i");
                         if (images.contains("t.png")) {
                             tests = test.replace("t.png", ".png");
                         }
@@ -50,7 +43,7 @@ public class ReadMangaPresenter {
                             tests = test.replace("t.jpg", ".jpg");
                         }
                     }
-                    henModelList.add(tests);
+                    henModelList.add("https://" + tests);
                 }
                 readMangaListener.onGetImageContentSuccess(henModelList, title);
             } else if (menu.equalsIgnoreCase("henNexus")) {
@@ -79,7 +72,7 @@ public class ReadMangaPresenter {
                 }
                 readMangaListener.onGetImageContentSuccess(henModelList, title);
             }
-            Log.e("result", new Gson().toJson(henModelList));
+            Log.e("image url result", new Gson().toJson(henModelList));
             Log.e("title", title);
         } else {
             readMangaListener.onGetImageContentError();

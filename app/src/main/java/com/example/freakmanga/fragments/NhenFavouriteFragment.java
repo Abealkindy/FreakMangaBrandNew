@@ -82,7 +82,7 @@ public class NhenFavouriteFragment extends Fragment implements SearchView.OnQuer
         List<NhenBookmarkTable> historyModelList;
         if (hitStatus.equalsIgnoreCase("ordinary")) {
             historyModelList = localAppDB.nhenBookmarkDAO().getNhenBookmarkData();
-            Log.e("read history", new Gson().toJson(historyModelList));
+            Log.e("read bookmark", new Gson().toJson(historyModelList));
             if (validateList(historyModelList)) {
                 showRecyclerResult(historyModelList);
             } else {
