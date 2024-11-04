@@ -1,9 +1,9 @@
 # FreakManga
-Browse and read hentai manga from 3 of some biggest hentai websites in one app
+Browse and read ero/hentai manga from 3 of some biggest hentai websites in an app
 
-*Just experimental project, there's so many NSFW contents. So, this app is just for 18+ peoples or 21+ for Indonesian 😂
+*Just an experimental project. This one is (obviously, lol) full of 🌽, and even worse, sometimes you guys will find some disturbing or grotesque things. So, please beware and use it responsibly 🥸
 
-*Some users from some countries may require VPN to use this app. So, don't forget to run your VPN app before use this app. Cheers 😁🍻
+*And, umm... please don't forget to turn your VPN or private DNS on before using this app 🫣 cheers! 😁🍻
 
 ## Content sources:
 
