@@ -21,8 +21,9 @@
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true"
-            android:screenOrientation="userPortrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +33,8 @@
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="userPortrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

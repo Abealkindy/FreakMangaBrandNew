@@ -11,15 +11,16 @@ import com.example.freakmanga.R;
 import com.example.freakmanga.activities.mangapages.manga_main_mvp.MangaMainActivity;
 import com.example.freakmanga.databinding.ActivityMainBinding;
 import com.example.freakmanga.data.networks.InternetConnection;
-import com.zhkrb.cloudflare_scrape_webview.CfCallback;
-import com.zhkrb.cloudflare_scrape_webview.Cloudflare;
-import com.zhkrb.cloudflare_scrape_webview.util.ConvertUtil;
+//import com.zhkrb.cloudflare_scrape_webview.CfCallback;
+//import com.zhkrb.cloudflare_scrape_webview.Cloudflare;
+//import com.zhkrb.cloudflare_scrape_webview.util.ConvertUtil;
 
-import java.net.HttpCookie;
-import java.util.List;
+//import java.net.HttpCookie;
+//import java.util.List;
+//import java.util.Map;
 
 import static com.example.freakmanga.MyApp.mMenu;
-import static com.example.freakmanga.MyApp.ua;
+//import static com.example.freakmanga.MyApp.ua;
 import static com.example.freakmanga.MyApp.cookiesz;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,31 +37,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void connectionCheck(String url, String menu) {
         if (InternetConnection.checkConnection(this)) {
-            try {
-                Cloudflare cloudflare = new Cloudflare(this, url);
-                cloudflare.setUser_agent(ua);
-                cloudflare.setCfCallback(new CfCallback() {
-                    @Override
-                    public void onSuccess(List<HttpCookie> cookieList, boolean hasNewUrl, String newUrl) {
-                        cookiesz = ConvertUtil.List2Map(cookieList);
+//            try {
+//                Cloudflare cloudflare = new Cloudflare(this, url);
+//                cloudflare.setUser_agent(ua);
+//                cloudflare.setCfCallback(new CfCallback() {
+//                    @Override
+//                    public void onSuccess(List<HttpCookie> cookieList, boolean hasNewUrl, String newUrl) {
+                        cookiesz = null;
                         mMenu = menu;
                         Toast.makeText(MainActivity.this, "Berhasil!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, MangaMainActivity.class);
                         intent.putExtra("menu", menu);
                         startActivity(intent);
                         finish();
-                    }
-
-                    @Override
-                    public void onFail(int code, String msg) {
-                        cloudflare.cancel();
-                        Toast.makeText(MainActivity.this, "Lagi tutup dulu, nanti balik lagi yah!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                cloudflare.getCookies();
-            } catch (Exception e) {
-                Toast.makeText(MainActivity.this, "Lagi tutup dulu, nanti balik lagi yah!", Toast.LENGTH_LONG).show();
-            }
+//                    }
+//
+//                    @Override
+//                    public void onFail(int code, String msg) {
+//                        cloudflare.cancel();
+//                        Toast.makeText(MainActivity.this, "Lagi tutup dulu, nanti balik lagi yah!", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//                cloudflare.getCookies();
+//            } catch (Exception e) {
+//                Toast.makeText(MainActivity.this, "Lagi tutup dulu, nanti balik lagi yah!", Toast.LENGTH_LONG).show();
+//            }
         } else {
             Toast.makeText(MainActivity.this, "Cek internetnya dulu boss, nanti balik lagi yah!", Toast.LENGTH_LONG).show();
         }

@@ -1,67 +1,73 @@
-apply plugin: 'com.android.application'
-
+plugins {
+    id("com.android.application")
+}
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    namespace = "com.example.freakmanga"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId "com.example.freakmanga"
-        minSdkVersion 26
-        targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.example.freakmanga"
+        minSdk = 26
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
+            minifyEnabled = false
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    
-    viewBinding.enabled = true
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation "androidx.room:room-runtime:2.3.0"
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'androidx.navigation:navigation-ui:2.3.5'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.navigation:navigation-fragment:2.3.5'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.borjabravo:readmoretextview:2.1.0'
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation 'com.eclipsesource.j2v8:j2v8:4.5.0@aar'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'com.haozhang.libary:android-slanted-textview:1.2'
-    implementation 'com.zhkrb.cloudflare-scrape-android:scrape-webview:0.0.3'
-    implementation 'me.grantland:autofittextview:0.2.1'
-    implementation 'org.jsoup:jsoup:1.12.1'
-    implementation('com.github.bumptech.glide:okhttp3-integration:4.11.0') {
+    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation('androidx.cardview:cardview:1.0.0')
+    implementation('androidx.room:room-runtime:2.6.1')
+    implementation('androidx.appcompat:appcompat:1.7.0')
+    implementation('androidx.navigation:navigation-ui:2.8.3')
+    implementation('androidx.legacy:legacy-support-v4:1.0.0')
+    implementation('androidx.recyclerview:recyclerview:1.3.2')
+    implementation('androidx.navigation:navigation-fragment:2.8.3')
+    implementation('androidx.lifecycle:lifecycle-extensions:2.2.0')
+    implementation('androidx.constraintlayout:constraintlayout:2.2.0')
+    implementation('com.google.code.gson:gson:2.11.0')
+    implementation('com.intuit.sdp:sdp-android:1.1.1')
+    implementation('com.intuit.ssp:ssp-android:1.1.1')
+    implementation('com.squareup.picasso:picasso:2.71828')
+    implementation('com.github.bravoborja:ReadMoreTextView:2.1.0')
+    implementation('com.github.chrisbanes:PhotoView:2.3.0')
+    implementation('com.eclipsesource.j2v8:j2v8:6.2.1@aar')
+    implementation('com.github.bumptech.glide:glide:4.16.0')
+    implementation('com.google.android.material:material:1.12.0')
+    implementation('com.github.HeZaiJin:SlantedTextView:11f456534c')
+//    implementation('com.github.zhkrb:cloudflare-scrape-Android:0.0.3')
+    implementation('me.grantland:autofittextview:0.2.1')
+    implementation('org.jsoup:jsoup:1.18.1')
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.16.0') {
         exclude group: 'glide-parent'
     }
-    testImplementation 'junit:junit:4.13'
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor "androidx.room:room-compiler:2.3.0"
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    testImplementation('junit:junit:4.13.2')
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor('org.projectlombok:lombok:1.18.34')
+    annotationProcessor('androidx.room:room-compiler:2.6.1')
+    annotationProcessor('com.github.bumptech.glide:compiler:4.16.0')
+    androidTestImplementation('androidx.test:runner:1.6.2')
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.6.1')
+//    debugImplementation( 'com.squareup.leakcanary:leakcanary-android:2.5'
 }
