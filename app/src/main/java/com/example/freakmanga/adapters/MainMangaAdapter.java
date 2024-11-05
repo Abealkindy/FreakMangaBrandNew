@@ -11,7 +11,13 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.freakmanga.R;
 import com.example.freakmanga.activities.mangapages.read_manga_mvp.ReadMangaActivity;
@@ -21,11 +27,18 @@ import com.example.freakmanga.databinding.MangaItemListBinding;
 import com.example.freakmanga.fragments.NhenHistoryFragment;
 import com.example.freakmanga.models.MangaMainPageModel;
 import com.example.freakmanga.utils.Const;
+import com.example.freakmanga.utils.GlideApp;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+
+import okhttp3.Dns;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.dnsoverhttps.DnsOverHttps;
 
 public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.ViewHolder> {
     private Context context;
@@ -82,7 +95,7 @@ public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.View
         }
         holder.itemListBinding.textTitle.setText(title);
         try {
-            Glide.with(context)
+            GlideApp.with(context)
                     .asDrawable()
                     .load(new URL(thumb))
                     .apply(
@@ -137,5 +150,6 @@ public class MainMangaAdapter extends RecyclerView.Adapter<MainMangaAdapter.View
             this.itemListBinding = itemViewList;
         }
     }
+
 
 }
