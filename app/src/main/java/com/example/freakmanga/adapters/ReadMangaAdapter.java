@@ -2,10 +2,6 @@ package com.example.freakmanga.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicConvolve3x3;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.example.freakmanga.MyApp.mMenu;
 
 import com.example.freakmanga.R;
 import com.example.freakmanga.data.networks.InternetConnection;
 import com.example.freakmanga.databinding.ReadMangaItemListBinding;
-import com.example.freakmanga.utils.ConvolutionMatrix;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -30,13 +24,6 @@ import com.squareup.picasso.Transformation;
 
 import java.util.List;
 import java.util.Objects;
-
-import javax.xml.XMLConstants;
-
-import okhttp3.Dns;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.dnsoverhttps.DnsOverHttps;
 
 public class ReadMangaAdapter extends RecyclerView.Adapter<ReadMangaAdapter.ViewHolder> {
     private Context context;

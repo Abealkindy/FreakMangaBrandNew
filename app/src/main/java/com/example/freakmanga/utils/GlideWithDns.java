@@ -13,10 +13,6 @@ import com.example.freakmanga.data.networks.InternetConnection;
 
 import java.io.InputStream;
 
-import okhttp3.Dns;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.dnsoverhttps.DnsOverHttps;
 
 @GlideModule
 public class GlideWithDns extends AppGlideModule {
