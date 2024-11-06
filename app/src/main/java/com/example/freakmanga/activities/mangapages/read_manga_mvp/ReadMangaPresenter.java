@@ -1,17 +1,24 @@
 package com.example.freakmanga.activities.mangapages.read_manga_mvp;
 
+import static com.example.freakmanga.MyApp.localAppDB;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
 import com.example.freakmanga.R;
 import com.example.freakmanga.data.networks.JsoupConfig;
+import com.example.freakmanga.data.room.nhen_local.bookmark.NhenBookmarkTable;
 import com.google.gson.Gson;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ReadMangaPresenter {
@@ -49,6 +56,9 @@ public class ReadMangaPresenter {
                     henModelList.add("https://" + tests);
                 }
                 readMangaListener.onGetImageContentSuccess(henModelList, title);
+                /* set favourite image status */
+                NhenBookmarkTable nhenBookmarkTable = localAppDB.nhenBookmarkDAO().findByURL(url);
+                readMangaListener.onFavouriteChanged(nhenBookmarkTable != null && !nhenBookmarkTable.getMangaDetailURL().isEmpty() && nhenBookmarkTable.getMangaDetailURL().equals(url));
             } else if (menu.equalsIgnoreCase("henNexus")) {
                 title = document.getElementsByTag("h1").text();
                 elements = document.getElementsByClass("column is-2-fullhd is-one-fifth-widescreen is-one-fifth-desktop is-one-quarter-tablet");
@@ -79,6 +89,30 @@ public class ReadMangaPresenter {
             Log.e("title", title);
         } else {
             readMangaListener.onGetImageContentError();
+        }
+    }
+
+    public void setFavourite(String title, String thumbUrl, String contentUrl) {
+        NhenBookmarkTable nhenBookmarkTable = localAppDB.nhenBookmarkDAO().findByURL(contentUrl);
+        boolean isFavourite = nhenBookmarkTable != null &&
+                !nhenBookmarkTable.getMangaDetailURL().isEmpty() &&
+                nhenBookmarkTable.getMangaDetailURL().equals(contentUrl);
+        if (!isFavourite) {
+            Date dateNow = Calendar.getInstance().getTime();
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+            String formattedDate = df.format(dateNow);
+            NhenBookmarkTable mangaBookmarkModel = new NhenBookmarkTable();
+            mangaBookmarkModel.setMangaAddedDate(formattedDate);
+            mangaBookmarkModel.setMangaTitle(title);
+            mangaBookmarkModel.setMangaThumb(thumbUrl);
+            mangaBookmarkModel.setMangaDetailURL(contentUrl);
+            localAppDB.nhenBookmarkDAO().insertBookmarkData(mangaBookmarkModel);
+
+            readMangaListener.onFavouriteChanged(true);
+        } else {
+            localAppDB.nhenBookmarkDAO().deleteBookmarkItem(contentUrl);
+
+            readMangaListener.onFavouriteChanged(false);
         }
     }
 }

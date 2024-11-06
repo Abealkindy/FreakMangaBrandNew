@@ -6,4 +6,6 @@ public interface ReadMangaListener {
     void onGetImageContentSuccess(List<String> imageContentList, String title);
 
     void onGetImageContentError();
+
+    void onFavouriteChanged(boolean isFavourite);
 }

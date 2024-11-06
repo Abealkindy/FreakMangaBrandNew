@@ -15,7 +15,6 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.freakmanga.R;
 import com.example.freakmanga.adapters.ReadMangaAdapter;
-import com.example.freakmanga.data.room.nhen_local.bookmark.NhenBookmarkTable;
 import com.example.freakmanga.data.room.nhen_local.history.NhenHistoryTable;
 import com.example.freakmanga.databinding.ActivityReadMangaBinding;
 
@@ -31,8 +30,6 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
     private List<String> imageContentListLocal = new ArrayList<>();
     private ProgressDialog progressDialog;
     private String menu = "", url = "", thumbURL = "", title = "";
-    private boolean isFavourite = false;
-    NhenBookmarkTable mangaBookmarkModel = new NhenBookmarkTable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +42,7 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
 
     private void initEvent() {
         mBinding.buttonReload.setOnClickListener(v -> getContentData());
-        mBinding.buttonFavourite.setOnClickListener(view -> {
-            if (!isFavourite) {
-                Date dateNow = Calendar.getInstance().getTime();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-                String formattedDate = df.format(dateNow);
-                mangaBookmarkModel.setMangaAddedDate(formattedDate);
-                mangaBookmarkModel.setMangaTitle(title);
-                mangaBookmarkModel.setMangaThumb(thumbURL);
-                mangaBookmarkModel.setMangaDetailURL(url);
-                localAppDB.nhenBookmarkDAO().insertBookmarkData(mangaBookmarkModel);
-                setFavourite(true);
-            } else {
-                localAppDB.nhenBookmarkDAO().deleteBookmarkItem(url);
-                setFavourite(false);
-            }
-        });
+        mBinding.buttonFavourite.setOnClickListener(view -> readMangaPresenter.setFavourite(title, thumbURL, url));
         mBinding.buttonShare.setOnClickListener(view -> {
             Intent shareToOther = new Intent(Intent.ACTION_SEND);
             shareToOther.setType("text/plain");
@@ -84,7 +66,6 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
         thumbURL = getIntent().getStringExtra("mangaThumb");
         title = getIntent().getStringExtra("mangaTitle");
         insertToHistoryTable();
-        checkBookmarkData();
         initProgressDialog();
         getContentData();
     }
@@ -101,20 +82,6 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
         localAppDB.nhenHistoryDAO().insertHistoryData(mangaBookmarkModel);
     }
 
-    private void checkBookmarkData() {
-        NhenBookmarkTable nhenBookmarkTable = localAppDB.nhenBookmarkDAO().findByURL(url);
-        setFavourite(nhenBookmarkTable != null && !nhenBookmarkTable.getMangaDetailURL().isEmpty() && nhenBookmarkTable.getMangaDetailURL().equals(url));
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private void setFavourite(boolean isFavourite) {
-        this.isFavourite = isFavourite;
-        if (isFavourite) {
-            mBinding.buttonFavourite.setImageDrawable(getDrawable(R.drawable.ic_favorite_filled_24dp));
-        } else {
-            mBinding.buttonFavourite.setImageDrawable(getDrawable(R.drawable.ic_favorite_unfilled_24dp));
-        }
-    }
 
     private void initProgressDialog() {
         progressDialog = new ProgressDialog(this);
@@ -182,12 +149,21 @@ public class ReadMangaActivity extends AppCompatActivity implements ReadMangaLis
         }
     }
 
-
     @Override
     public void onGetImageContentError() {
         runOnUiThread(() -> {
             progressDialog.dismiss();
             isntError(true);
         });
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @Override
+    public void onFavouriteChanged(boolean isFavourite) {
+        if (isFavourite) {
+            mBinding.buttonFavourite.setImageDrawable(getDrawable(R.drawable.ic_favorite_filled_24dp));
+        } else {
+            mBinding.buttonFavourite.setImageDrawable(getDrawable(R.drawable.ic_favorite_unfilled_24dp));
+        }
     }
 }
